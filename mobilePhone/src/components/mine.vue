@@ -13,8 +13,7 @@
     <el-button  class="btn2" @click="addC" >求和</el-button >
     <el-button  class="btn2" @click="add" >+</el-button >
     <el-button  class="btn3" @click="sud" >-</el-button ><br>
-    <i class="el-icon-arrow-left"></i>
-
+    <i class="el-icon-arrow-left" @click="$router.go(-1)"></i>
     性别：<input type="radio" name="sex">男
     <input type="radio" name="sex">女
     <span>提示:{{length}}</span><br>

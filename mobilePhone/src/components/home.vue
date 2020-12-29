@@ -1,10 +1,16 @@
 <template>
- <div></div>
+ <div class="home">
+
+  <el-button-group>
+  <el-button type="primary" icon="el-icon-arrow-left">上一页</el-button>
+  <router-link to="/mine"> <el-button type="primary" >下一页<i class="el-icon-arrow-right el-icon--right"></i></el-button> </router-link>
+</el-button-group>
+ </div>
 </template>
 
 <script>
 export default {
-  name: 'HelloWorld',
+  name: 'home',
 
   data () {
     return {
@@ -27,39 +33,6 @@ export default {
     }
   },
   methods: {
-
-    countDown () {
-      if (!this.canClick) {
-        return
-      }
-      this.canClick = false
-      // this.content = this.totalTime + 's后重新发送'
-      let clock = window.setInterval(() => {
-        this.totalTime--
-        this.content = this.totalTime + 's重新发送'
-        if (this.totalTime < 1) {
-          window.clearInterval(clock)
-          this.content = '发送验证码'
-          this.totalTime = 10
-          this.canClick = true
-        }
-      }, 1000)
-    },
-    addC: function () {
-      this.num = parseInt(this.length) + parseInt(this.width)
-    },
-    add: function () {
-      console.log('add start')
-      this.Index[0].age++
-    },
-    sud: function () {
-      console.log('add start')
-      if (this.Index[1].age > 111) {
-        this.Index[1].age--
-      } else {
-        alert('最小了')
-      }
-    },
     OCcallJSClick (a) {
       alert('传递到vue成功')
 
