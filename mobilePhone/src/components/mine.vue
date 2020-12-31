@@ -1,10 +1,16 @@
 <template>
-  <div class="hello">
-    <h1>{{ msg +' '+ msg2 }}</h1>
-    长度：<input v-model="length" type="text" name="rectangle"><br>
-    宽度：<input v-model="width" type="text" name="rectangle"> <br>
-    面积：<input v-model="areas" type="text" name="rectangle"> <br>
-    和为：<input v-model="num" name="rectangle">
+<div class="mine">
+<i class="el-icon-arrow-left" @click="emitMethod"></i>
+<div class="middle_outer">
+  <div class="middle_inner">
+  <h1>{{ msg +' '+ msg2 }}</h1>
+
+  <el-input placeholder="请输入内容" v-model="input1" class="inputx">
+    <template slot="prepend">Http://</template>
+  </el-input><br>
+  <el-input placeholder="请输入内容" v-model="input2" class="inputx">
+    <template slot="append">.com</template>
+  </el-input>
     <ul class="one">
       <li v-for="str in Index" :key="str.id"> {{str.title}}</li>
       <li v-for="str in Index" :key="str.id"> {{str.age}}</li>
@@ -13,34 +19,38 @@
     <el-button  class="btn2" @click="addC" >求和</el-button >
     <el-button  class="btn2" @click="add" >+</el-button >
     <el-button  class="btn3" @click="sud" >-</el-button ><br>
-    <i class="el-icon-arrow-left" @click="$router.go(-1)"></i>
-    性别：<input type="radio" name="sex">男
-    <input type="radio" name="sex">女
+    性别：<el-radio v-model="radio" label="1">男</el-radio>
+         <el-radio v-model="radio" label="2">女</el-radio>
     <span>提示:{{length}}</span><br>
     <textarea id ="returnValue" type="value" rows="5" cols="40">
     </textarea><br>
     <el-button type="primary" id="one" v-on:click="OCwxPayBlock">OC调用JS方法</el-button>
     <el-button type="primary" id="two" v-on:click="clickVUE">JS调用OC方法</el-button>
     <br>
-    <a v-bind:href="hrefurl" target="_blank"> <img :src="imgurl" alt=""> </a>
+     <br>
+    <a v-bind:href="hrefurl" target="_blank"> <img :src="imgurl" alt="" class="img"> </a>
 
   </div>
+  </div>
+
+</div>
 </template>
 
 <script>
 export default {
-  name: 'HelloWorld',
+  name: 'mine',
 
   data () {
     return {
-
+      radio: '1',
       hrefurl: 'https://www.baidu.com',
       imgurl: 'https://ss1.bdstatic.com/70cFuXSh_Q1YnxGkpoWK1HF6hhy/it/u=1603365312,3218205429&fm=26&gp=0.jpg',
       msg: 'Welcome to Your Vue.js',
       msg2: 'App',
-      length: '',
-      width: '',
-      num: '',
+      input1: '',
+      input2: '',
+      input3: '',
+      select: '',
       totalTime: 10,
       content: '发送验证码',
       canClick: true,
@@ -90,9 +100,6 @@ export default {
         }
       }, 1000)
     },
-    addC: function () {
-      this.num = parseInt(this.length) + parseInt(this.width)
-    },
     add: function () {
       console.log('add start')
       this.Index[0].age++
@@ -131,12 +138,18 @@ export default {
       }
       // 如何弹出json数据 JSON.stringify(data)
       document.getElementById('returnValue').value = JSON.stringify(a)
+    },
+    emitMethod () {
+      this.$emit('data1', '嘿嘿嘿')
+      this.$router.go(-1)
     }
   }
 }
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
+<!-- position: absolute   relative -->
+
 <style scoped>
 ul {
    list-style-type: none;
@@ -160,4 +173,28 @@ li {
   color:#57a3f3;
 }
 
+.img {
+   width: 100px;
+   height: 100px;
+}
+
+.middle_outer {
+  position: absolute;
+  top: 45px;
+  bottom: 60px; /*footer部分的高度*/
+  left: 10px;
+  right: 10px;
+  overflow: hidden; /*外层div不滚动，而是内层div滚动，实现自适应*/
+  height: auto !important;
+}
+.middle_inner {
+  left: 10px;
+  right: 10px;
+  height: 100%;
+  overflow-y: auto;  /*当内容超出后，就会出现滚动条*/
+}
+.el-icon-arrow-left {
+   position: fixed;
+   margin-top: 5px;
+}
 </style>

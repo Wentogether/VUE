@@ -1,10 +1,32 @@
 <template>
  <div class="home">
 
-  <el-button-group>
-  <router-link to="/mine"> <el-button type="primary" >下一页<i class="el-icon-arrow-right el-icon--right"></i></el-button> </router-link>
+<div class="middle_outer">
+  <div class="middle_inner">
+<h2>一多选题（至少选择两项）</h2>
+<h3>1.Xcode开发工具支持以下几种开发语言</h3>
+  <el-checkbox-group v-model="checkList" class="1">
+    <el-checkbox label="A.swift语言"></el-checkbox><br>
+    <el-checkbox label="B.object-c语言"></el-checkbox><br>
+    <el-checkbox label="C.java语言"></el-checkbox><br>
+    <el-checkbox label="D.C++语言"></el-checkbox><br>
+    <el-checkbox label="点击选中选项" disabled></el-checkbox>
+  </el-checkbox-group>
+<h3>2.Xcode开发工具支持以下几种开发语言</h3>
+  <el-checkbox-group v-model="checkList2" class="2">
+    <el-checkbox label="A.swift语言"></el-checkbox><br>
+    <el-checkbox label="B.object-c语言"></el-checkbox><br>
+    <el-checkbox label="C.java语言"></el-checkbox><br>
+    <el-checkbox label="D.C++语言"></el-checkbox>
+  </el-checkbox-group>
+    <el-button-group>
+  <router-link to="/mine"> <el-button type="primary" class="btn-block">下一页<i class="el-icon-arrow-right el-icon--right"></i></el-button> </router-link>
 </el-button-group>
+    <!-- 组件 -->
+    <mine :text="component1Text" v-on:data1="emit"></mine>
  </div>
+  </div>
+   </div>
 </template>
 
 <script>
@@ -12,7 +34,9 @@ export default {
   name: 'home',
   data () {
     return {
-      a: ''
+      a: '',
+      checkList: ['点击选中选项'],
+      checkList2: []
     }
   },
   //  常用的生命周期方法
@@ -57,6 +81,10 @@ export default {
       }
       // 如何弹出json数据 JSON.stringify(data)
       document.getElementById('returnValue').value = JSON.stringify(a)
+    },
+    emit (data1) {
+      alert(data1)
+      console.log('data1', data1)
     }
   }
 }
@@ -64,6 +92,7 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
+
 ul {
    list-style-type: none;
    padding: 0;
@@ -85,5 +114,24 @@ li {
   border-color: #ddd;
   color:#57a3f3;
 }
-
+.btn-block {
+   position: fixed;
+   bottom: 10px;
+   right: 0px;
+}
+.middle_outer {
+  position: absolute;
+  top: 45px;
+  bottom: 60px; /*footer部分的高度*/
+  left: 10px;
+  right: 10px;
+  overflow: hidden; /*外层div不滚动，而是内层div滚动，实现自适应*/
+  height: auto !important;
+}
+.middle_inner {
+  left: 10px;
+  right: 10px;
+  height: 100%;
+  overflow-y: auto;  /*当内容超出后，就会出现滚动条*/
+}
 </style>
